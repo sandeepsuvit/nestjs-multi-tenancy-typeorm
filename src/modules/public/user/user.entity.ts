@@ -1,6 +1,7 @@
-import { Entity, Column, PrimaryGeneratedColumn, JoinColumn, OneToMany } from "typeorm";
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from "typeorm";
 import { BaseEntity } from "src/commons/base.entity";
 import { TeamEntity } from "../team/team.entity";
+import { Exclude } from "class-transformer";
 
 export enum USER_STATUS {
     ACIVE = 1,
@@ -25,6 +26,7 @@ export class UserEntity extends BaseEntity {
     @Column({ name: "email", type: "varchar", length: 255, unique: true })
     email: string;
 
+    @Exclude({ toPlainOnly: true })
     @Column({ name: "password", type: "varchar", length: 255 })
     password: string;
 

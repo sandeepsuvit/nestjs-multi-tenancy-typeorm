@@ -1,6 +1,7 @@
 import { Controller, Get, Headers, Post, UseGuards, Body, Put, Param, Delete } from '@nestjs/common';
 import { TeamService } from './team.service';
 import { HasTokenAdminGuard } from 'src/guards/has-token-admin.guard';
+import { TeamReq } from './dto/team.req';
 
 @Controller('team')
 export class TeamController {
@@ -20,13 +21,13 @@ export class TeamController {
 
     @Post('/')
     @UseGuards(HasTokenAdminGuard)
-    create(@Headers('user_admin') user_admin, @Body() data) {
+    create(@Headers('user_admin') user_admin, @Body() data: TeamReq) {
         return this.teamService.create({ auth: user_admin, data });
     }
 
     @Put('/:id')
     @UseGuards(HasTokenAdminGuard)
-    update(@Headers('user_admin') user_admin, @Param('id') id, @Body() data) {
+    update(@Headers('user_admin') user_admin, @Param('id') id, @Body() data: TeamReq) {
         return this.teamService.update({ auth: user_admin, id, data });
     }
 
