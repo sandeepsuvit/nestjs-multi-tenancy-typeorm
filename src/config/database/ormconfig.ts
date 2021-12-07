@@ -11,7 +11,7 @@ module.exports = {
     password: process.env.DB_PASS || "password",
     database: process.env.DB_NAME || "tenancy_db",
     migrationRun: true,
-    synchronize: true,
+    synchronize: process.env.NODE_ENV === 'development',
     entities: [
         join(__dirname, '../../modules/public/**/*.entity{.ts,.js}'),
     ],

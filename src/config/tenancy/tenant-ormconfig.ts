@@ -6,7 +6,7 @@ dotenv.config()
 
 module.exports = {
     ...ormconfig,
-    synchronize: true,
+    synchronize: process.env.NODE_ENV === 'development',
     logging: true,
     entities: [
         join(__dirname, '../../modules/tenant/**/*.entity{.ts,.js}'),

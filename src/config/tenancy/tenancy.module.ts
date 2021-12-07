@@ -1,4 +1,4 @@
-import { Module, Scope, Global } from '@nestjs/common';
+import { Module, Scope, Global, BadRequestException } from '@nestjs/common';
 import { getConnectionManager, createConnection } from 'typeorm';
 import * as tenantOrmConfig from './tenant-ormconfig'
 import * as ormconfig from '../database/ormconfig'
@@ -16,7 +16,7 @@ const connectionFactory = {
         const found = await connectionPublic.getRepository(TeamEntity).findOne({code: codeTenant})
 
         if(!found){
-            throw new Error('Tenant not found')
+            throw new BadRequestException('Tenant code not valid')
         }
 
         const tenancy = found.code

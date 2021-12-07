@@ -1,48 +1,58 @@
-import { Controller, Get, Param, Post, Body, Put, Delete, UseGuards } from '@nestjs/common';
+import { Controller, Get, Param, Post, Body, Put, Delete, UseGuards, Headers } from '@nestjs/common';
 import { UserService } from './user.service';
-import { SuperadminonlyGuard } from 'src/guards/superadminonly.guard';
+import { SuperAdminOnlyGuard } from 'src/guards/super-admin-only.guard';
+import { HasTokenAdminGuard } from 'src/guards/has-token-admin.guard';
+import { UserReq, UserReqUpdate } from './dto/user.req';
 
 @Controller('user')
 export class UserController {
     constructor(
         private userService: UserService
-    ){}
+    ) { }
 
     @Get('/initialize')
-    async initialize(){
+    async initialize() {
         return this.userService.initialize();
     }
 
     @Get('/')
-    @UseGuards(SuperadminonlyGuard)
-    async findAll(){
+    @UseGuards(SuperAdminOnlyGuard)
+    async findAll() {
         return this.userService.findAll();
     }
 
     @Get('/me')
-    @UseGuards(SuperadminonlyGuard)
-    async findMe(@Param('id') id: string){
-        return this.userService.findById(id);
+    @UseGuards(HasTokenAdminGuard)
+    async findMe(@Headers('user_admin') user_admin) {
+        return this.userService.findById(user_admin.id);
     }
 
     @Get('/:id')
-    @UseGuards(SuperadminonlyGuard)
-    async findById(@Param('id') id: string){
+    @UseGuards(SuperAdminOnlyGuard)
+    async findById(@Param('id') id: string) {
         return this.userService.findById(id);
     }
 
     @Post('/')
-    async create(@Body() data){
+    async create(@Body() data: UserReq) {
         return this.userService.create(data);
     }
 
+    @Put('/me')
+    @UseGuards(HasTokenAdminGuard)
+    async updateMe(@Headers('user_admin') user_admin, @Body() data: UserReqUpdate) {
+        return this.userService.update(user_admin.id, data);
+    }
+
     @Put('/:id')
-    async update(@Param('id') id: string, @Body() data){
+    @UseGuards(SuperAdminOnlyGuard)
+    async update(@Param('id') id: string, @Body() data: UserReqUpdate) {
         return this.userService.update(id, data);
     }
 
     @Delete('/:id')
-    async delete(@Param('id') id: string){
+    @UseGuards(SuperAdminOnlyGuard)
+    async delete(@Param('id') id: string) {
         return this.userService.delete(id);
     }
 }

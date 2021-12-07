@@ -8,4 +8,7 @@ export class PlayerEntity extends BaseEntity {
 
     @Column({name: "name", type: "varchar", length: 255})
     name: string;
+
+    @Column({name: "number", type: "integer", default: 1})
+    number: number;
 }
