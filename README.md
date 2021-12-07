@@ -5,7 +5,7 @@
 [circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
 [circleci-url]: https://circleci.com/gh/nestjs/nest
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
+  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications with multi tenancy module and Schema Typeorm.</p>
     <p align="center">
 <a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
 <a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
@@ -24,7 +24,7 @@
 
 ## Description
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository. (Still in development)
 
 ## Installation
 
@@ -58,6 +58,27 @@ $ npm run test:e2e
 $ npm run test:cov
 ```
 
+## Information
+
+This is Nestjs Restfull API with Multi tenancy, inspired from https://tech.canyonlegal.com/multitenancy-with-nestjs-typeorm-postgres.
+
+With multi tenancy schema postgres typeorm.
+
+For initial please hit api to create superadmin account with username: superadmin and password: password.
+
+```bash
+http://localhost:3000/user/initialize
+```
+If you adding new tables and columns in tenancy entity please hit with NODE_ENV=development to synchronize database.
+```bash
+http://localhost:3000/sync_db
+```
+Please fork if you want modify this repo.
+
+Please support me [here](https://saweria.co/alfianriv).
+
+[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/X8X37AUSM)
+
 ## Support
 
 Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
@@ -67,7 +88,7 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 - Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
 - Website - [https://nestjs.com](https://nestjs.com/)
 - Twitter - [@nestframework](https://twitter.com/nestframework)
-
+- Creator - [@alfianriv](https://instagram.com/alfianriv)
 ## License
 
 Nest is [MIT licensed](LICENSE).
