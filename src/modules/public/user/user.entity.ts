@@ -1,5 +1,6 @@
-import { Entity, Column, PrimaryGeneratedColumn } from "typeorm";
+import { Entity, Column, PrimaryGeneratedColumn, JoinColumn, OneToMany } from "typeorm";
 import { BaseEntity } from "src/commons/base.entity";
+import { TeamEntity } from "../team/team.entity";
 
 export enum USER_STATUS {
     ACIVE = 1,
@@ -32,4 +33,7 @@ export class UserEntity extends BaseEntity {
 
     @Column({ name: "status", type: "enum", enum: USER_ROLE, default: USER_ROLE.SUPERADMIN })
     role: string;
+
+    @OneToMany((type) => TeamEntity, (team) => team.pic)
+    teams: TeamEntity[];
 }

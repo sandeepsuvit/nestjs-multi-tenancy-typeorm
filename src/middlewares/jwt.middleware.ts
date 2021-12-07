@@ -12,7 +12,9 @@ export class JwtMiddleware implements NestMiddleware {
                 token_admin = token_admin[0]
             }
             const user = this.jwtService.verify(token_admin);
-            req.headers.user_admin = user;
+            if(user){
+                req.headers.user_admin = user;
+            }
         }
 
         let token_user = req.headers.token_user;
@@ -21,7 +23,9 @@ export class JwtMiddleware implements NestMiddleware {
                 token_user = token_user[0]
             }
             const user = this.jwtService.verify(token_user);
-            req.headers.user = user;
+            if(user){
+                req.headers.user = user;
+            }
         }
         next();
     }
