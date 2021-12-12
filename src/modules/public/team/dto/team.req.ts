@@ -3,9 +3,6 @@ import { TEAM_STATUS } from "../team.entity";
 
 export class TeamReq {
     @IsString()
-    code: string;
-
-    @IsString()
     name: string;
 
     @IsOptional()

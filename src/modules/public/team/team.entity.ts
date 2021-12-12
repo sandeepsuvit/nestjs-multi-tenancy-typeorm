@@ -19,13 +19,16 @@ export class TeamEntity extends BaseEntity {
     @Column({ name: "name", type: "varchar", length: 255 })
     name: string;
 
+    @Column({ name: "subdomain", type: "varchar", length: 255, unique: true })
+    subdomain: string;
+
     @Column({ name: "status", type: "enum", enum: TEAM_STATUS, default: TEAM_STATUS.ACIVE })
     status: string;
 
     @Column({ name: "created_by", type: "integer" })
     created_by: number;
 
-    @Column({ name: "updated_at", type: "integer" })
+    @Column({ name: "updated_by", type: "integer", nullable: true })
     updated_by: number;
 
     @ManyToOne((type) => UserEntity, (user) => user.teams)

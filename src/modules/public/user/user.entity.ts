@@ -26,14 +26,14 @@ export class UserEntity extends BaseEntity {
     @Column({ name: "email", type: "varchar", length: 255, unique: true })
     email: string;
 
-    @Exclude({ toPlainOnly: true })
+    @Exclude()
     @Column({ name: "password", type: "varchar", length: 255 })
     password: string;
 
     @Column({ name: "status", type: "enum", enum: USER_STATUS, default: USER_STATUS.ACIVE })
     status: string;
 
-    @Column({ name: "status", type: "enum", enum: USER_ROLE, default: USER_ROLE.SUPERADMIN })
+    @Column({ name: "role", type: "enum", enum: USER_ROLE, default: USER_ROLE.SUPERADMIN })
     role: string;
 
     @OneToMany((type) => TeamEntity, (team) => team.pic)
